@@ -71,18 +71,17 @@ func main() {
 	json.Unmarshal(byteValue, &orders)
 
 	// we iterate through every oder within our orders array and print out the full order as just an example
-	/*
-		for i := 0; i < len(orders.Orders); i++ {
-			fmt.Print("Order id: " + orders.Orders[i].ID)
-			fmt.Print("; Markerplace: " + orders.Orders[i].Marketplace)
-			fmt.Print("; Country: " + orders.Orders[i].Country)
 
-			// Stocké dans une variable car on va vouloir récupérer se montant plus tard.
-			var tmp = orders.Orders[i].Amount_cents / 100
-			fmt.Printf("; Amount_€: %.2f", tmp)
-			fmt.Println("; Created_at: " + orders.Orders[i].Created_at)
-		}
-	*/
+	for i := 0; i < len(orders.Orders); i++ {
+		fmt.Print("Order id: " + orders.Orders[i].ID)
+		fmt.Print("; Markerplace: " + orders.Orders[i].Marketplace)
+		fmt.Print("; Country: " + orders.Orders[i].Country)
+
+		// Stocké dans une variable car on va vouloir récupérer se montant plus tard.
+		var tmp = orders.Orders[i].Amount_cents / 100
+		fmt.Printf("; Amount_€: %.2f", tmp)
+		fmt.Println("; Created_at: " + orders.Orders[i].Created_at)
+	}
 
 	//On récupére nos marketplaces
 	//var markets := getMarkets(orders)
