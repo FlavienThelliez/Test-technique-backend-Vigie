@@ -22,11 +22,36 @@ type Order struct {
 	Created_at   string  `json:"created_at"`
 }
 
+// Une fonction récupérant tout les "marketplace" et nous retournant un tableau de ses derniers
+// Nécessaire pour déterminer les "marketplace" distincts et plus tard le revenu total par marketplace
+// Attention aux "marketplace" vide !
+/*
+func getMarkets(orders Orders) []string{
+
+}
+*/
+
+// Calcule le revenu total et par markets
+// Prend en argument les orders et les markets
+/*
+func revenu(orders Orders, markets){
+
+}
+*/
+
+// Recense les commandes suspectes. Sous-fonction appelé par la fonction "revenu"
+// func suspiciousOrder(){}
+
 func main() {
-	/*name := "Go Developers"
-	fmt.Println("Azure for", name)*/
-	// Open our jsonFile
-	jsonFile, err := os.Open("orders.json")
+	// Open our jsonFile passed as an argument (or use "orders.json")
+	var jsonFile *os.File
+	var err error
+	if len(os.Args) > 1 {
+		jsonFile, err = os.Open(os.Args[1])
+	} else {
+		jsonFile, err = os.Open("orders.json")
+	}
+
 	// if os.Open returns an error then handle it
 	if err != nil {
 		fmt.Println(err)
@@ -45,20 +70,21 @@ func main() {
 	// jsonFile's content into 'orders' which we defined above
 	json.Unmarshal(byteValue, &orders)
 
-	// we iterate through every oder within our orders array and
-	// print out the full order as just an example
-	for i := 0; i < len(orders.Orders); i++ {
-		fmt.Print("Order id: " + orders.Orders[i].ID)
-		fmt.Print("; Markerplace: " + orders.Orders[i].Marketplace)
-		fmt.Print("; Country: " + orders.Orders[i].Country)
+	// we iterate through every oder within our orders array and print out the full order as just an example
+	/*
+		for i := 0; i < len(orders.Orders); i++ {
+			fmt.Print("Order id: " + orders.Orders[i].ID)
+			fmt.Print("; Markerplace: " + orders.Orders[i].Marketplace)
+			fmt.Print("; Country: " + orders.Orders[i].Country)
 
-		// Code invalide pour traiter le montant (problèmes de type)
-		/*var tmp = strconv.Itoa(orders.Orders[i].Amount_cents)
-		fmt.Print("; Amount_cent: " + tmp)*/
+			// Stocké dans une variable car on va vouloir récupérer se montant plus tard.
+			var tmp = orders.Orders[i].Amount_cents / 100
+			fmt.Printf("; Amount_€: %.2f", tmp)
+			fmt.Println("; Created_at: " + orders.Orders[i].Created_at)
+		}
+	*/
 
-		// Stocké dans une variable car on va vouloir récupérer se montant plus tard.
-		var tmp = orders.Orders[i].Amount_cents / 100
-		fmt.Printf("; Amount_€: %.2f", tmp)
-		fmt.Println("; Created_at: " + orders.Orders[i].Created_at)
-	}
+	//On récupére nos marketplaces
+	//var markets := getMarkets(orders)
+
 }
